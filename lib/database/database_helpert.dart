@@ -6,6 +6,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 import '../models/event_model.dart';
+import '../models/popular_model.dart';
 
 class DatabaseHelper {
   static final nombreBD = 'TECBOOKBD';
@@ -120,5 +121,21 @@ class DatabaseHelper {
       where: '$idColumnName = ?',
       whereArgs: [data[idColumnName]],
     );
+  }
+
+  Future<List<PopularModel>> getAllPopular() async {
+    var conexion = await database;
+    var result = await conexion.query('tblPopularFav');
+    return result.map((popular) => PopularModel.fromMap(popular)).toList();
+  }
+
+  Future<bool> searchPopular(int id_popular) async {
+    var conexion = await database;
+    var query = "SELECT * FROM tblPopularFav where id=?";
+    var result = await conexion.rawQuery(query, [id_popular]);
+    if (result != null && result.isNotEmpty) {
+      return true;
+    }
+    return false;
   }
 }

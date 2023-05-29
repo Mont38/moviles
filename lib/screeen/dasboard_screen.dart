@@ -58,7 +58,24 @@ class _DashboardScreenState extends State<DashboardScreen> {
               onPressed: () {
                 Navigator.pushNamed(context, '/events');
               },
-              child: const Icon(Icons.auto_awesome,
+              child: const Icon(Icons.calendar_month,
+                  color: Color.fromRGBO(196, 111, 235, 1)),
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                  side: const BorderSide(
+                    color: Color.fromRGBO(255, 178, 122, 1),
+                  ),
+                ),
+                primary: Colors.white,
+                backgroundColor: const Color.fromRGBO(88, 89, 90, 0.239),
+              ),
+              onPressed: () {
+                Navigator.pushNamed(context, '/movies');
+              },
+              child: const Icon(Icons.movie_creation_outlined,
                   color: Color.fromRGBO(196, 111, 235, 1)),
             ),
           ],

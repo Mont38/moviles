@@ -53,6 +53,7 @@ dependencies:
   syncfusion_flutter_calendar: ^20.4.54
   shared_preferences: ^2.0.18
   cloud_firestore: ^4.5.0
+  youtube_player_flutter: ^8.1.2
 
   
 dev_dependencies:
