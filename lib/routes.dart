@@ -3,6 +3,7 @@ import 'package:app1/screeen/events_screen.dart';
 import 'package:app1/screeen/login_screen.dart';
 import 'package:app1/screeen/movie_list_screen.dart';
 import 'package:app1/screeen/onboarding_screen.dart';
+import 'package:app1/screeen/pokemon_list_screen.dart';
 import 'package:app1/screeen/register_screen.dart';
 import 'package:flutter/widgets.dart';
 
@@ -16,5 +17,6 @@ Map<String, WidgetBuilder> getApplicationRoutes() {
     '/events': (BuildContext context) => EventsScreen(),
     '/login': (BuildContext context) => LoginScreen(),
     '/movies': (BuildContext context) => MovieListVideos(),
+    '/pokemon': (BuildContext context) => PokemonListView(),
   };
 }

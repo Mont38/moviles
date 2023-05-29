@@ -78,6 +78,23 @@ class _DashboardScreenState extends State<DashboardScreen> {
               child: const Icon(Icons.movie_creation_outlined,
                   color: Color.fromRGBO(196, 111, 235, 1)),
             ),
+            TextButton(
+              style: TextButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                  side: const BorderSide(
+                    color: Color.fromRGBO(255, 178, 122, 1),
+                  ),
+                ),
+                primary: Colors.white,
+                backgroundColor: const Color.fromRGBO(88, 89, 90, 0.239),
+              ),
+              onPressed: () {
+                Navigator.pushNamed(context, '/pokemon');
+              },
+              child: const Icon(Icons.catching_pokemon_outlined,
+                  color: Color.fromRGBO(196, 111, 235, 1)),
+            ),
           ],
         ),
       ),
