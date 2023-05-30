@@ -10,7 +10,7 @@ import '../models/popular_model.dart';
 
 class DatabaseHelper {
   static final nombreBD = 'TECBOOKBD';
-  static final versionBD = 12;
+  static final versionBD = 13;
 
   static Database? _database;
   Future<Database> get database async {

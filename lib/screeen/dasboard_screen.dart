@@ -1,6 +1,7 @@
 import 'package:app1/screeen/list_post_screen.dart';
 import 'package:app1/settings/styles.dart';
 import 'package:day_night_switcher/day_night_switcher.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,33 +18,23 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
   bool isDarkThemeEnable = false;
+  final user = FirebaseAuth.instance.currentUser!;
 
   @override
   Widget build(BuildContext context) {
-    FlagsProvider flags = Provider.of<FlagsProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Bueno para las cuentas'),
       ),
-      body: flags.getflagListPost() == true
-          ? const ListPostScreen()
-          : ListPostScreen(),
-      floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {
-            _opencustoeDialog();
-          },
-          icon: Icon(Icons.add_comment),
-          label: Text('add post')),
-      drawer: Drawer(
+      body: Drawer(
         child: ListView(
           children: [
             UserAccountsDrawerHeader(
                 currentAccountPicture: CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      'https://i.pinimg.com/564x/15/5e/a4/155ea4a6a22db66e8bf1eaba7349ffd8.jpg'),
+                  backgroundImage: NetworkImage('${user.photoURL}'),
                 ),
-                accountName: Text('Natanael Cano'),
-                accountEmail: Text('rancho@humilde.com.mx')),
+                accountName: Text('${user.displayName}'),
+                accountEmail: Text('${user.email}')),
             TextButton(
               style: TextButton.styleFrom(
                 shape: RoundedRectangleBorder(
@@ -94,6 +85,25 @@ class _DashboardScreenState extends State<DashboardScreen> {
               },
               child: const Icon(Icons.catching_pokemon_outlined,
                   color: Color.fromRGBO(196, 111, 235, 1)),
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                  side: const BorderSide(
+                    color: Color.fromRGBO(255, 178, 122, 1),
+                  ),
+                ),
+                primary: Colors.white,
+                backgroundColor: const Color.fromRGBO(88, 89, 90, 0.239),
+              ),
+              onPressed: () {
+                FirebaseAuth.instance.signOut().then(
+                      (value) => Navigator.pushNamed(context, '/login'),
+                    );
+              },
+              child: const Icon(Icons.exit_to_app,
+                  color: Color.fromRGBO(255, 178, 122, 1)),
             ),
           ],
         ),

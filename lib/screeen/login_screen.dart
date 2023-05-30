@@ -1,7 +1,10 @@
+import 'package:app1/firebase/auth_google.dart';
 import 'package:app1/screeen/responsive.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
 
+import '../firebase/auth_git.dart';
 import '../widgets/loading_modal.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -13,12 +16,25 @@ class LoginScreen extends StatefulWidget {
 
 //lo debajo son text from donde se ponen los recuadros donde van tanto el correo como la contraseña
 //se le puso OutlineInputBorder para poner la linea que rodea los bordes de la caja de texto
+final emailController = TextEditingController();
+final passwordController = TextEditingController();
+
 class _LoginScreenState extends State<LoginScreen> {
   bool isLoading = false;
+  void singUserIn() async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailController.text, password: passwordController.text);
+      Navigator.pushNamed(context, '/dash');
+
+      print('sing');
+    } on FirebaseAuthException catch (e) {}
+  }
 
   final txtEmail = TextFormField(
+    controller: emailController,
     decoration: const InputDecoration(
-        label: Text('Tu correo baboso'),
+        label: Text('email'),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
             width: 3,
@@ -28,8 +44,9 @@ class _LoginScreenState extends State<LoginScreen> {
         border: OutlineInputBorder()),
   );
   final txtPass = TextFormField(
+    controller: passwordController,
     decoration: const InputDecoration(
-        label: Text('Tu contrasenia baboso'),
+        label: Text('password'),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
             width: 3,
@@ -47,8 +64,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final btnFace = SocialLoginButton(
       buttonType: SocialLoginButtonType.facebook, onPressed: () {});
-  final btnGit = SocialLoginButton(
-      buttonType: SocialLoginButtonType.github, onPressed: () {});
 
   final imgLogo = Image.asset(
     'assets/logo.png',
@@ -68,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
     final btnGoogle = SocialLoginButton(
         buttonType: SocialLoginButtonType.google,
         onPressed: () {
-          Navigator.pushNamed(context, '/onboarding');
+          AuthGoogle().signInWithGoogle(context);
         });
 
     final txtRegister = Padding(
@@ -83,6 +98,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 TextStyle(fontSize: 18, decoration: TextDecoration.underline),
           )),
     );
+    final btnGit = SocialLoginButton(
+        buttonType: SocialLoginButtonType.github,
+        onPressed: () {
+          signInWithGitHub(context);
+        });
 
     final btnEmail = SocialLoginButton(
         buttonType: SocialLoginButtonType.generalLogin,
@@ -92,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
           Future.delayed(Duration(milliseconds: 4000)).then((value) {
             isLoading = false;
             setState(() {});
-            Navigator.pushNamed(context, '/dash');
+            singUserIn();
           });
         });
 

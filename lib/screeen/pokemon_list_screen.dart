@@ -123,7 +123,7 @@ class PokemonListViewState extends State<PokemonListView> {
             child: CircularProgressIndicator(),
           )
         : GridView.count(
-            crossAxisCount: 3,
+            crossAxisCount: 2,
             children: pokeHub!.pokemon!
                 .map((poke) => Padding(
                       padding: const EdgeInsets.all(2.0),
@@ -139,15 +139,16 @@ class PokemonListViewState extends State<PokemonListView> {
                         child: Hero(
                           tag: poke.img,
                           child: Card(
+                            color: Colors.transparent,
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: <Widget>[
                                 Container(
                                   height:
-                                      MediaQuery.of(context).size.height * 0.4,
+                                      MediaQuery.of(context).size.height * 0.15,
                                   width:
-                                      MediaQuery.of(context).size.width * 0.2,
+                                      MediaQuery.of(context).size.width * 0.35,
                                   decoration: BoxDecoration(
                                       image: DecorationImage(
                                           fit: BoxFit.cover,
@@ -176,7 +177,7 @@ class PokemonListViewState extends State<PokemonListView> {
             child: CircularProgressIndicator(),
           )
         : GridView.count(
-            crossAxisCount: 3,
+            crossAxisCount: 2,
             children: pokeHub!.pokemon!
                 .map((poke) => Padding(
                       padding: const EdgeInsets.all(2.0),
@@ -192,19 +193,19 @@ class PokemonListViewState extends State<PokemonListView> {
                         child: Hero(
                           tag: poke.img,
                           child: Card(
-                            elevation: 10,
+                            color: Colors.transparent,
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: <Widget>[
                                 Container(
                                   height:
-                                      MediaQuery.of(context).size.height * 0.4,
+                                      MediaQuery.of(context).size.height * 0.15,
                                   width:
-                                      MediaQuery.of(context).size.width * 0.2,
+                                      MediaQuery.of(context).size.width * 0.35,
                                   decoration: BoxDecoration(
                                       image: DecorationImage(
-                                          fit: BoxFit.cover,
+                                          fit: BoxFit.fill,
                                           image: NetworkImage(poke.img))),
                                 ),
                                 Text(
